@@ -11,30 +11,35 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/jsx">
+    <script type="text/babel">
         var site = document.getElementById("tela");
         var root = ReactDOM.createRoot(tela);
         function BodyTesks(){
             return (
-                <div id="blocoAgenda">
-                    <div id="cabeca">
-                        <div id="contador">
-                            <strong>
-                                0
-                            </strong>
+                <>
+                    <div id="blocoAgenda">
+                        <div id="cabeca">
+                            <div id="contador">
+                                <strong>
+                                    0
+                                </strong>
+                            </div>
+                            <div id="titulo">
+                                <strong>
+                                    TESKS OF THE DAY
+                                </strong>
+                            </div>
+                            <div id="addTesk">
+                                <strong>
+                                    +
+                                </strong>
+                            </div>
                         </div>
-                        <div id="titulo">
-                            <strong>
-                                TESKS OF THE DAY
-                            </strong>
-                        </div>
-                        <div id="addTesk">
-                            <strong>
-                                +
-                            </strong>
+                        <div class="estruturaTesk">
+                        
                         </div>
                     </div>
-                </div>
+                </>
             )
         }
         root.render(<BodyTesks />);
