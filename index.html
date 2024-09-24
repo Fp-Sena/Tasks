@@ -35,6 +35,11 @@
                                 </strong>
                             </div>
                         </div>
+                        <div id="listaTesks">
+                            <NewTesk tarefa="Projeto de programação"/>
+                            <NewTesk tarefa="Homework"/>
+                            <NewTesk tarefa="Comprar whey"/>
+                        </div>    
                     </div>
                 </>
             )
@@ -42,7 +47,10 @@
         function NewTesk(propt) {
             return (
                 <>
-                    dsdsa
+                    <div id="estruturaTesk">
+                        <h1>{propt.tarefa}</h1>
+                        Lição de Inglês
+                    </div>
                 </>
             )
         }
@@ -50,7 +58,6 @@
             return (
                 <>
                     <BodyTesks />
-                    <NewTesk />
                 </>
             )
         }
