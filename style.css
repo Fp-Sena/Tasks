@@ -10,11 +10,10 @@ body {
 #blocoAgenda {
     background-color: rgb(204, 202, 202);
     display: block;
-    justify-content: center;
     font-family: 'Courier New', Courier, monospace;
     margin-top: 2%;
     width: 800px;
-    height: 670px;
+    height: 655px;
     border: solid black 5px;
 }
 

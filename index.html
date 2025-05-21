@@ -16,7 +16,6 @@
         var root = ReactDOM.createRoot(tela);
         function BodyTesks(){
             return (
-                <>
                     <div id="blocoAgenda">
                         <div id="cabeca">
                             <div id="contador">
@@ -41,23 +40,21 @@
                             <NewTesk tarefa="Comprar whey"/>
                         </div>    
                     </div>
-                </>
             )
         }
         function NewTesk(propt) {
             return (
-                <>
                     <div id="estruturaTesk">
                         <h1>{propt.tarefa}</h1>
                         Lição de Inglês
                     </div>
-                </>
             )
         }
         function App(){
             return (
                 <>
                     <BodyTesks />
+                    <p>kkkk</p>
                 </>
             )
         }
