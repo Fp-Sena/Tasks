@@ -20,7 +20,7 @@
                         <div id="cabeca">
                             <div id="contador">
                                 <strong>
-                                    0
+                                    3
                                 </strong>
                             </div>
                             <div id="titulo">
@@ -35,9 +35,9 @@
                             </div>
                         </div>
                         <div id="listaTesks">
-                            <NewTesk tarefa="Projeto de programação"/>
-                            <NewTesk tarefa="Homework"/>
-                            <NewTesk tarefa="Comprar whey"/>
+                            <NewTesk tarefa="Projeto de programação" expecificacao="Começar taréfa"/>
+                            <NewTesk tarefa="Homework" expecificacao="Banco de dados"/>
+                            <NewTesk tarefa="Comprar whey" expecificacao="Hoje as 9h"/>
                         </div>    
                     </div>
             )
@@ -46,7 +46,7 @@
             return (
                     <div id="estruturaTesk">
                         <h1>{propt.tarefa}</h1>
-                        Lição de Inglês
+                        {propt.expecificacao && <h3>{propt.expecificacao}</h3>}
                     </div>
             )
         }
@@ -54,7 +54,6 @@
             return (
                 <>
                     <BodyTesks />
-                    <p>kkkk</p>
                 </>
             )
         }

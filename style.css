@@ -65,4 +65,6 @@ body {
 #estruturaTesk {
     width: 770px;
     background-color: white;
+    margin: auto;
+    padding-left: 1%;
 }
