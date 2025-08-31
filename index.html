@@ -15,12 +15,13 @@
         var site = document.getElementById("tela");
         var root = ReactDOM.createRoot(tela);
         function BodyTesks(){
+            const [numTarefas, setnumTarefas] = React.useState(3);
             return (
                     <div id="blocoAgenda">
                         <div id="cabeca">
                             <div id="contador">
                                 <strong>
-                                    3
+                                    {numTarefas}
                                 </strong>
                             </div>
                             <div id="titulo">
@@ -28,7 +29,7 @@
                                     TESKS OF THE DAY
                                 </strong>
                             </div>
-                            <div id="addTesk">
+                            <div onClick={() => setnumTarefas(numTarefas + 1)} id="addTesk">
                                 <strong>
                                     +
                                 </strong>
