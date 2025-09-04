@@ -17,6 +17,7 @@
         function BodyTesks(){
             const [numTarefas, setnumTarefas] = React.useState(3);
             return (
+                <>
                     <div id="blocoAgenda">
                         <div id="cabeca">
                             <div id="contador">
@@ -29,7 +30,10 @@
                                     TESKS OF THE DAY
                                 </strong>
                             </div>
-                            <div onClick={() => setnumTarefas(numTarefas + 1)} id="addTesk">
+                            <div onClick={() =>{
+                                setnumTarefas(numTarefas + 1);
+                                abrirModal();
+                            }} id="addTesk">
                                 <strong>
                                     +
                                 </strong>
@@ -41,6 +45,14 @@
                             <NewTesk tarefa="Comprar whey" expecificacao="Hoje as 9h"/>
                         </div>    
                     </div>
+                    <div class="modal" id="modal">
+                        <div onClick={() => {setnumTarefas(numTarefas - 1)
+                        }} class="modalTask">
+                        <button class="fechar" id="fechar">X</button>
+                                .........
+                        </div>
+                    </div>
+                </>
             )
         }
         function NewTesk(propt) {
@@ -49,8 +61,18 @@
                         <h1>{propt.tarefa}</h1>
                         {propt.expecificacao && <h3>{propt.expecificacao}</h3>}
                     </div>
-            )
+                    )
         }
+        function abrirModal(){
+                        const modal = document.getElementById('modal')
+                        modal.classList.add('abrir')
+
+                        modal.addEventListener('click', (e) => {
+                            if(e.target.id == 'fechar' || e.target.id == 'modal'){
+                            modal.classList.remove('abrir');
+                            }
+                        })
+                    }
         function App(){
             return (
                 <>
