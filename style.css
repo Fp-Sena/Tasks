@@ -62,11 +62,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    background-color: rgba(61, 57, 53, 0.779);
+    background-color: rgba(61, 57, 53, 0.904);
 }
 .modal.abrir {
     width: 100vw;
@@ -78,14 +78,14 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    background-color: rgba(61, 57, 53, 0.779)
+    background-color: rgba(61, 57, 53, 0.647)
 }
 
 .modalTask {
     width: 60%;
     min-width: 450px;
     min-height: 200px;
-    background-color: rgba(204, 202, 202, 0.753);
+    background-color: rgba(204, 202, 202, 0.741);
     backdrop-filter: blur(10px);
     padding: 2%;
     border-radius: 20px;
@@ -134,15 +134,15 @@ body {
 }
 
 #nomeTarefa {
-    text-align: left;
     margin-top: 5%;
-    width: 96%;
-    height: 77%;
+    width: 93%;
+    height: 60%;
     background-color: white;
     position: absolute;
     border-radius: 2%;
     font-size: 20px;
-    
+    border: 2px dashed black;
+    padding: 1%;
 }
 
 #listaTesks {
