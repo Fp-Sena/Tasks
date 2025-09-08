@@ -46,10 +46,11 @@
                         </div>    
                     </div>
                     <div class="modal" id="modal">
-                        <div onClick={() => {setnumTarefas(numTarefas - 1)
-                        }} class="modalTask">
-                        <button class="fechar" id="fechar">X</button>
-                                .........
+                        <div class="modalTask">
+                            <button onClick={() => {setnumTarefas(numTarefas - 1)}} class="fechar" id="fechar">X</button>
+                            <div id="novaTarefa"><strong>Nova Taréfa</strong></div>
+                            <div id="nomeTarefa">Taréfa<input></input><br></br>
+                            Descrição<input></input></div>
                         </div>
                     </div>
                 </>
