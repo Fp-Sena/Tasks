@@ -32,7 +32,7 @@
                             </div>
                             <div onClick={() =>{
                                 setnumTarefas(numTarefas + 1);
-                                abrirModal();
+                                abrirModal(setnumTarefas, numTarefas);
                             }} id="addTesk">
                                 <strong>
                                     +
@@ -47,7 +47,7 @@
                     </div>
                     <div class="modal" id="modal">
                         <div class="modalTask">
-                            <button onClick={() => {setnumTarefas(numTarefas - 1)}} class="fechar" id="fechar">X</button>
+                            <button class="fechar" id="fechar">X</button>
                             <div id="novaTarefa"><strong>Nova Taréfa</strong></div>
                             <div id="nomeTarefa">
                             <div>Taréfa<input></input></div><br></br>
@@ -65,16 +65,19 @@
                     </div>
                     )
         }
-        function abrirModal(){
+        function abrirModal(setnumTarefas, numTarefas){
                         const modal = document.getElementById('modal')
+                        const fechar = document.getElementById('fechar')
                         modal.classList.add('abrir')
 
-                        modal.addEventListener('click', (e) => {
-                            if(e.target.id == 'fechar' || e.target.id == 'modal'){
+                        function lidaComClick(evento){
+                            if(evento.target.id == 'fechar' || evento.target.id == 'modal'){
                             modal.classList.remove('abrir');
+                            setnumTarefas((prev) => prev - 1);
                             }
-                        })
-                    }
+                        }
+                        modal.addEventListener('click', lidaComClick, {once: true})
+                        }
         function App(){
             return (
                 <>
