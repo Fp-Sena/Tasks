@@ -50,8 +50,10 @@
                             <button class="fechar" id="fechar">X</button>
                             <div id="novaTarefa"><strong>Nova Taréfa</strong></div>
                             <div id="nomeTarefa">
-                            <div>Taréfa<input></input></div><br></br>
-                            <div>Descrição<input></input></div></div>
+                            <div>Taréfa <input id="tarefa"></input></div><br></br>
+                            <div>Descrição <input id="descricao"></input></div>
+                            </div>
+                            <button id="confirmar"><strong> Criar Taréfa </strong></button>
                         </div>
                     </div>
                 </>
@@ -65,7 +67,7 @@
                     </div>
                     )
         }
-        function abrirModal(setnumTarefas, numTarefas){
+        function abrirModal(setnumTarefas, numTarefas, tarefa, descricao, confirmar){
                         const modal = document.getElementById('modal')
                         const fechar = document.getElementById('fechar')
                         modal.classList.add('abrir')
@@ -77,7 +79,15 @@
                             }
                         }
                         modal.addEventListener('click', lidaComClick, {once: true})
+
+                        const inputTarefa = document.getElementById('tarefa').value
+                        const inputDescricao = document.getElementById('descricao').useState
+                        const confirmar = document.getElementById('confirmar')
+                        function CriarNovaTarefa(evento){
+                            <NewTesk tarefa={inputTarefa} expecificacao={inputDescricao}/>
                         }
+                        confirmar.addEventListener('click', CriarNovaTarefa)
+        }
         function App(){
             return (
                 <>
