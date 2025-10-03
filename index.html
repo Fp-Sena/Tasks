@@ -67,7 +67,7 @@
                     </div>
                     )
         }
-        function abrirModal(setnumTarefas, numTarefas, tarefa, descricao, confirmar){
+        function abrirModal(setnumTarefas, numTarefas){
                         const modal = document.getElementById('modal')
                         const fechar = document.getElementById('fechar')
                         modal.classList.add('abrir')
@@ -81,12 +81,13 @@
                         modal.addEventListener('click', lidaComClick, {once: true})
 
                         const inputTarefa = document.getElementById('tarefa').value
-                        const inputDescricao = document.getElementById('descricao').useState
-                        const confirmar = document.getElementById('confirmar')
+                        const inputDescricao = document.getElementById('descricao').value
+                        const confirmar01 = document.getElementById('confirmar')
                         function CriarNovaTarefa(evento){
                             <NewTesk tarefa={inputTarefa} expecificacao={inputDescricao}/>
+                            console.log(inputTarefa)
                         }
-                        confirmar.addEventListener('click', CriarNovaTarefa)
+                        confirmar01.addEventListener('click', CriarNovaTarefa)
         }
         function App(){
             return (
