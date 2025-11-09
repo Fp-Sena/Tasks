@@ -13,89 +13,118 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         var site = document.getElementById("tela");
-        var root = ReactDOM.createRoot(tela);
+        var root = ReactDOM.createRoot(site);
+
         function BodyTesks(){
             const [numTarefas, setnumTarefas] = React.useState(3);
+            const [tarefa, setTarefa] = React.useState();
+            const [descricao, setDescricao] = React.useState();
+            const [showConfirmacao, setShowConfirmacao] = React.useState(false);
+
+            function fecharModal() {
+                const modal = document.getElementById('modal');
+                modal.classList.remove('abrir');
+                setnumTarefas((prev) => prev - 1);
+                // Limpa os campos
+                document.getElementById("tarefa").value = '';
+                document.getElementById("descricao").value = '';
+            }
+
+            function tentarFecharModal(evento) {
+                if(evento.target.id === 'modal') {
+                    setShowConfirmacao(true);
+                }
+            }
+
+            function fecharPeloX() {
+                setShowConfirmacao(true);
+            }
+
             return (
                 <>
                     <div id="blocoAgenda">
                         <div id="cabeca">
                             <div id="contador">
-                                <strong>
-                                    {numTarefas}
-                                </strong>
+                                <strong>{numTarefas}</strong>
                             </div>
                             <div id="titulo">
-                                <strong>
-                                    TESKS OF THE DAY
-                                </strong>
+                                <strong>TESKS OF THE DAY</strong>
                             </div>
-                            <div onClick={() =>{
+                            <div onClick={() => {
                                 setnumTarefas(numTarefas + 1);
-                                abrirModal(setnumTarefas, numTarefas);
+                                document.getElementById('modal').classList.add('abrir');
                             }} id="addTesk">
-                                <strong>
-                                    +
-                                </strong>
+                                <strong>+</strong>
                             </div>
                         </div>
                         <div id="listaTesks">
                             <NewTesk tarefa="Projeto de programação" expecificacao="Começar taréfa"/>
                             <NewTesk tarefa="Homework" expecificacao="Banco de dados"/>
                             <NewTesk tarefa="Comprar whey" expecificacao="Hoje as 9h"/>
+                            <NewTesk tarefa={tarefa} expecificacao={descricao}/>
                         </div>    
                     </div>
-                    <div class="modal" id="modal">
-                        <div class="modalTask">
-                            <button class="fechar" id="fechar">X</button>
+
+                    <div className="modal" id="modal" onClick={tentarFecharModal}>
+                        <div className="modalTask" onClick={(e) => e.stopPropagation()}>
+                            <button className="fechar" id="fechar" onClick={fecharPeloX}>X</button>
                             <div id="novaTarefa"><strong>Nova Taréfa</strong></div>
                             <div id="nomeTarefa">
-                            <div>Taréfa <input id="tarefa"></input></div><br></br>
-                            <div>Descrição <input id="descricao"></input></div>
+                                <div>Taréfa <input id="tarefa"></input></div><br/>
+                                <div>Descrição <input id="descricao"></input></div>
                             </div>
-                            <button id="confirmar"><strong> Criar Taréfa </strong></button>
+                            <button id="confirmar" onClick={() => salvarTask(setTarefa, setDescricao)}>
+                                <strong>Criar Taréfa</strong>
+                            </button>
                         </div>
                     </div>
+
+                    {showConfirmacao && (
+                        <div className="modal abrir" onClick={() => setShowConfirmacao(false)}>
+                            <div className="modalTask" onClick={(e) => e.stopPropagation()}>
+                                <div style={{textAlign: 'center', marginBottom: '20px'}}>
+                                    <strong>Tem certeza que deseja fechar?</strong>
+                                    <p>A tarefa será deletada</p>
+                                </div>
+                                <div style={{display: 'flex', gap: '20px', justifyContent: 'center'}}>
+                                    <button onClick={() => {
+                                        setShowConfirmacao(false);
+                                        fecharModal();
+                                    }} className="btn-confirmar">
+                                        Sim, fechar
+                                    </button>
+                                    <button onClick={() => setShowConfirmacao(false)} className="btn-cancelar">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </>
-            )
+            );
         }
+
         function NewTesk(propt) {
             return (
-                    <div id="estruturaTesk">
-                        <h1>{propt.tarefa}</h1>
-                        {propt.expecificacao && <h3>{propt.expecificacao}</h3>}
-                    </div>
-                    )
+                <div id="estruturaTesk">
+                    <h1>{propt.tarefa}</h1>
+                    {propt.expecificacao && <h3>{propt.expecificacao}</h3>}
+                </div>
+            );
         }
-        function abrirModal(setnumTarefas, numTarefas){
-                        const modal = document.getElementById('modal')
-                        const fechar = document.getElementById('fechar')
-                        modal.classList.add('abrir')
 
-                        function lidaComClick(evento){
-                            if(evento.target.id == 'fechar' || evento.target.id == 'modal'){
-                            modal.classList.remove('abrir');
-                            setnumTarefas((prev) => prev - 1);
-                            }
-                        }
-                        modal.addEventListener('click', lidaComClick, {once: true})
-
-                        const inputTarefa = document.getElementById('tarefa').value
-                        const inputDescricao = document.getElementById('descricao').value
-                        const confirmar01 = document.getElementById('confirmar')
-                        function CriarNovaTarefa(evento){
-                            <NewTesk tarefa={inputTarefa} expecificacao={inputDescricao}/>
-                            console.log(inputTarefa)
-                        }
-                        confirmar01.addEventListener('click', CriarNovaTarefa)
+        function salvarTask(setTarefa, setDescricao){
+            const tarefa01= document.getElementById("tarefa");
+            const descricao01= document.getElementById("descricao");
+            setTarefa(tarefa01.value);
+            setDescricao(descricao01.value);
+            document.getElementById('modal').classList.remove('abrir');
         }
+
         function App(){
-            return (
-                <>
-                    <BodyTesks />
-                </>
-            )
+            return <BodyTesks />;
         }
+
         root.render(<App />);
     </script>
 </body>
