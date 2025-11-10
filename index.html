@@ -16,18 +16,21 @@
         var root = ReactDOM.createRoot(site);
 
         function BodyTesks(){
-            const [numTarefas, setnumTarefas] = React.useState(3);
-            const [tarefa, setTarefa] = React.useState();
-            const [descricao, setDescricao] = React.useState();
+            const [tasks, setTasks] = React.useState([
+                { tarefa: "Projeto de programação", expecificacao: "Começar taréfa" },
+                { tarefa: "Homework", expecificacao: "Banco de dados" },
+                { tarefa: "Comprar whey", expecificacao: "Hoje as 9h" }
+            ]);
             const [showConfirmacao, setShowConfirmacao] = React.useState(false);
 
             function fecharModal() {
                 const modal = document.getElementById('modal');
                 modal.classList.remove('abrir');
-                setnumTarefas((prev) => prev - 1);
                 // Limpa os campos
-                document.getElementById("tarefa").value = '';
-                document.getElementById("descricao").value = '';
+                const t = document.getElementById("tarefa");
+                const d = document.getElementById("descricao");
+                if (t) t.value = '';
+                if (d) d.value = '';
             }
 
             function tentarFecharModal(evento) {
@@ -40,28 +43,38 @@
                 setShowConfirmacao(true);
             }
 
+            function abrirModal(){
+                document.getElementById('modal').classList.add('abrir');
+            }
+
+            function salvarTaskLocal(){
+                const tarefa01= document.getElementById("tarefa");
+                const descricao01= document.getElementById("descricao");
+                const novo = (tarefa01 && tarefa01.value) ? tarefa01.value : '';
+                const desc = (descricao01 && descricao01.value) ? descricao01.value : '';
+                if(novo.trim() === '') return; // não adiciona vazio
+                setTasks(prev => [...prev, { tarefa: novo, expecificacao: desc }]);
+                fecharModal();
+            }
+
             return (
                 <>
                     <div id="blocoAgenda">
                         <div id="cabeca">
                             <div id="contador">
-                                <strong>{numTarefas}</strong>
+                                <strong>{tasks.length}</strong>
                             </div>
                             <div id="titulo">
                                 <strong>TESKS OF THE DAY</strong>
                             </div>
                             <div onClick={() => {
-                                setnumTarefas(numTarefas + 1);
-                                document.getElementById('modal').classList.add('abrir');
+                                abrirModal();
                             }} id="addTesk">
                                 <strong>+</strong>
                             </div>
                         </div>
                         <div id="listaTesks">
-                            <NewTesk tarefa="Projeto de programação" expecificacao="Começar taréfa"/>
-                            <NewTesk tarefa="Homework" expecificacao="Banco de dados"/>
-                            <NewTesk tarefa="Comprar whey" expecificacao="Hoje as 9h"/>
-                            <NewTesk tarefa={tarefa} expecificacao={descricao}/>
+                            {tasks.map((t,i) => <NewTesk key={i} tarefa={t.tarefa} expecificacao={t.expecificacao} />)}
                         </div>    
                     </div>
 
@@ -73,7 +86,7 @@
                                 <div>Taréfa <input id="tarefa"></input></div><br/>
                                 <div>Descrição <input id="descricao"></input></div>
                             </div>
-                            <button id="confirmar" onClick={() => salvarTask(setTarefa, setDescricao)}>
+                            <button id="confirmar" onClick={salvarTaskLocal}>
                                 <strong>Criar Taréfa</strong>
                             </button>
                         </div>
@@ -113,13 +126,7 @@
             );
         }
 
-        function salvarTask(setTarefa, setDescricao){
-            const tarefa01= document.getElementById("tarefa");
-            const descricao01= document.getElementById("descricao");
-            setTarefa(tarefa01.value);
-            setDescricao(descricao01.value);
-            document.getElementById('modal').classList.remove('abrir');
-        }
+        // salvarTask moved inside BodyTesks as salvarTaskLocal
 
         function App(){
             return <BodyTesks />;
